@@ -268,7 +268,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
       #endif
 
       // Start decryption
-      Decryption(&SecretKey, &CipherText, &PlainText);
+      Decryption(&PlainText, &CipherText, &SecretKey);
 
       // End decryption
       PrintPlainText(&huart, &CipherText);

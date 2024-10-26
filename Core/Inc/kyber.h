@@ -11,7 +11,7 @@
 typedef unsigned char uint8_t;
 
 void SetSecretKey(UART_HandleTypeDef *huart, uint8_t* SecretKey);
-void Decryption(const uint8_t* SecretKey, const uint8_t* CipherText, uint8_t* PlainText);
+void Decryption(uint8_t* PlainText, const uint8_t* CipherText, const uint8_t* SecretKey);
 void GetCipherText(UART_HandleTypeDef *huart, uint8_t* CipherText);
 void PrintPlainText(UART_HandleTypeDef *huart, const uint8_t* PlainText);
 
