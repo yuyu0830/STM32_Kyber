@@ -21,6 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "kyber.h"
 
 /* USER CODE END Includes */
 
@@ -31,6 +32,10 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+
+// 1 : Debug mode
+// 0 : Execute mode
+#define DEBUG_MODE 1
 
 /* USER CODE END PD */
 
@@ -43,6 +48,11 @@
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
+
+uint8_t StartSignal;
+uint8_t SecretKey[SECRETKEYBYTES];
+uint8_t CipherText[CIPHERTEXTBYTES];
+uint8_t PlainText[PLAINTEXTBYTES];
 
 /* USER CODE END PV */
 
@@ -98,7 +108,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+    HAL_UART_Receive_IT(&huart2, &StartSignal, 1);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -226,6 +236,49 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+// TODO : 중복 호출인지 글로벌 변수 써서 확인하기
+// 이거 계속 콜백되는거면 사용될 때마다 중첩되는거임..?
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+  if (huart->Instance == USART2)
+  {
+    // Get StartSignal
+	  HAL_UART_Receive_IT(&huart2, &StartSignal, 1);
+
+    // if StartSignal == NULL
+    // Set Secret Key
+    if (!StartSignal) 
+    {
+      SetSecretKey(&huart, &SecretKey);
+
+      #if DEBUG_MODE
+        PrintSecretKey(&huart, &SecretKey);
+      #endif
+    }
+
+    // if StartSignal == 1
+    // Start Dectyption
+    else
+    {
+      GetCipherText(&huart, &CipherText);
+
+      #if DEBUG_MODE
+        PrintCipherText(&huart, &CipherText);
+      #endif
+
+      // Start decryption
+      Decryption(&SecretKey, &CipherText, &PlainText);
+
+      // End decryption
+      PrintPlainText(&huart, &CipherText);
+
+
+      // End Signal
+      HAL_UART_Transmit(&huart, (uint8_t) 0, 1, TIMEOUT);      
+    }
+  }
+}
 
 /* USER CODE END 4 */
 

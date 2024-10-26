@@ -131,7 +131,7 @@ int crypto_kem_enc(uint8_t *ct,
 *              - const uint8_t *ct: pointer to input cipher text
 *                (an already allocated array of KYBER_CIPHERTEXTBYTES bytes)
 *              - const uint8_t *sk: pointer to input private key
-*                (an already allocated array of KYBER_SECRETKEYBYTES bytes)
+*                (an already allocated array of KYBER_SECRETKEYBYTES byte)
 *
 * Returns 0.
 *
