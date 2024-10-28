@@ -1,0 +1,3 @@
+../Core/Src/indcpa.c:19:13:unpack_sk	1
+../Core/Src/indcpa.c:34:13:unpack_ciphertext	1
+../Core/Src/indcpa.c:53:6:pqcrystals_kyber768_ref_indcpa_dec	1

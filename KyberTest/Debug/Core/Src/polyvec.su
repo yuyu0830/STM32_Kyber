@@ -1,0 +1,4 @@
+../Core/Src/polyvec.c:16:6:pqcrystals_kyber768_ref_polyvec_decompress	40	static
+../Core/Src/polyvec.c:67:6:pqcrystals_kyber768_ref_polyvec_frombytes	24	static
+../Core/Src/polyvec.c:81:6:pqcrystals_kyber768_ref_polyvec_ntt	24	static
+../Core/Src/polyvec.c:98:6:pqcrystals_kyber768_ref_polyvec_basemul_acc_montgomery	544	static

@@ -1,0 +1,9 @@
+../Core/Src/poly.c:17:6:pqcrystals_kyber768_ref_poly_decompress	24	static
+../Core/Src/poly.c:59:6:pqcrystals_kyber768_ref_poly_frombytes	24	static
+../Core/Src/poly.c:76:6:pqcrystals_kyber768_ref_poly_tomsg	32	static
+../Core/Src/poly.c:106:6:pqcrystals_kyber768_ref_poly_ntt	16	static
+../Core/Src/poly.c:121:6:pqcrystals_kyber768_ref_poly_invntt_tomont	16	static
+../Core/Src/poly.c:135:6:pqcrystals_kyber768_ref_poly_basemul_montgomery	40	static
+../Core/Src/poly.c:152:6:pqcrystals_kyber768_ref_poly_reduce	24	static
+../Core/Src/poly.c:168:6:pqcrystals_kyber768_ref_poly_add	32	static
+../Core/Src/poly.c:184:6:pqcrystals_kyber768_ref_poly_sub	32	static

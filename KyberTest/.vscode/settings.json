@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "kyber.h": "c",
+        "poly.h": "c"
+    }
+}

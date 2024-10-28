@@ -1,0 +1,2 @@
+../Core/Src/reduce.c:16:9:pqcrystals_kyber768_ref_montgomery_reduce	24	static
+../Core/Src/reduce.c:35:9:pqcrystals_kyber768_ref_barrett_reduce	24	static
