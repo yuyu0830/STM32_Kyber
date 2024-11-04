@@ -255,7 +255,7 @@ int main() {
 	SendKey();
 
 	// 새로운 메시지, 암호문 만들기
-	for (int r = 0; r < 5; r++) {
+	for (int r = 0; r < 2000; r++) {
 		printf("### %d\n", r);
 		Encryption(ciphertext, originText, publicKey);
 		

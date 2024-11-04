@@ -7,24 +7,12 @@
       "RelativeMoniker": "D:0:0:{A29C869B-545D-485B-BB9C-06FC6116F677}|Project1\\Project1.vcxproj|solutionrelative:Project1\\main.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A29C869B-545D-485B-BB9C-06FC6116F677}|Project1\\Project1.vcxproj|D:\\GitHub\\KyberSerial\\Project1\\Project1\\Encryption.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A29C869B-545D-485B-BB9C-06FC6116F677}|Project1\\Project1.vcxproj|solutionrelative:Project1\\Encryption.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A29C869B-545D-485B-BB9C-06FC6116F677}|Project1\\Project1.vcxproj|D:\\GitHub\\KyberSerial\\Project1\\Project1\\Params.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A29C869B-545D-485B-BB9C-06FC6116F677}|Project1\\Project1.vcxproj|solutionrelative:Project1\\Params.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A29C869B-545D-485B-BB9C-06FC6116F677}|Project1\\Project1.vcxproj|D:\\GitHub\\KyberSerial\\Project1\\Project1\\Encryption.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A29C869B-545D-485B-BB9C-06FC6116F677}|Project1\\Project1.vcxproj|solutionrelative:Project1\\Encryption.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A29C869B-545D-485B-BB9C-06FC6116F677}|Project1\\Project1.vcxproj|D:\\GitHub\\KyberSerial\\Project1\\Project1\\kem.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A29C869B-545D-485B-BB9C-06FC6116F677}|Project1\\Project1.vcxproj|solutionrelative:Project1\\kem.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A29C869B-545D-485B-BB9C-06FC6116F677}|Project1\\Project1.vcxproj|D:\\GitHub\\KyberSerial\\Project1\\Project1\\kem.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A29C869B-545D-485B-BB9C-06FC6116F677}|Project1\\Project1.vcxproj|solutionrelative:Project1\\kem.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{A29C869B-545D-485B-BB9C-06FC6116F677}|Project1\\Project1.vcxproj|D:\\GitHub\\KyberSerial\\Project1\\Project1\\Encryption.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A29C869B-545D-485B-BB9C-06FC6116F677}|Project1\\Project1.vcxproj|solutionrelative:Project1\\Encryption.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A29C869B-545D-485B-BB9C-06FC6116F677}|Project1\\Project1.vcxproj|D:\\GitHub\\KyberSerial\\Project1\\Project1\\KeyList.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
@@ -33,6 +21,18 @@
     {
       "AbsoluteMoniker": "D:0:0:{A29C869B-545D-485B-BB9C-06FC6116F677}|Project1\\Project1.vcxproj|D:\\GitHub\\KyberSerial\\Project1\\Project1\\RandomBytes.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A29C869B-545D-485B-BB9C-06FC6116F677}|Project1\\Project1.vcxproj|solutionrelative:Project1\\RandomBytes.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A29C869B-545D-485B-BB9C-06FC6116F677}|Project1\\Project1.vcxproj|D:\\GitHub\\KyberSerial\\Project1\\Project1\\Encryption.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A29C869B-545D-485B-BB9C-06FC6116F677}|Project1\\Project1.vcxproj|solutionrelative:Project1\\Encryption.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A29C869B-545D-485B-BB9C-06FC6116F677}|Project1\\Project1.vcxproj|D:\\GitHub\\KyberSerial\\Project1\\Project1\\Params.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A29C869B-545D-485B-BB9C-06FC6116F677}|Project1\\Project1.vcxproj|solutionrelative:Project1\\Params.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A29C869B-545D-485B-BB9C-06FC6116F677}|Project1\\Project1.vcxproj|D:\\GitHub\\KyberSerial\\Project1\\Project1\\kem.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A29C869B-545D-485B-BB9C-06FC6116F677}|Project1\\Project1.vcxproj|solutionrelative:Project1\\kem.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A29C869B-545D-485B-BB9C-06FC6116F677}|Project1\\Project1.vcxproj|D:\\GitHub\\KyberSerial\\Project1\\Project1\\verify.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -62,12 +62,11 @@
               "RelativeToolTip": "Project1\\verify.c",
               "ViewState": "AQIAAAAAAAAAAAAAAAArwBgAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
-              "WhenOpened": "2024-10-28T13:44:29.523Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-28T13:44:29.523Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "kem.h",
               "DocumentMoniker": "D:\\GitHub\\KyberSerial\\Project1\\Project1\\kem.h",
               "RelativeDocumentMoniker": "Project1\\kem.h",
@@ -80,7 +79,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "kem.c",
               "DocumentMoniker": "D:\\GitHub\\KyberSerial\\Project1\\Project1\\kem.c",
               "RelativeDocumentMoniker": "Project1\\kem.c",
@@ -88,18 +87,17 @@
               "RelativeToolTip": "Project1\\kem.c",
               "ViewState": "AQIAAEIAAAAAAAAAAAAAAEsAAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
-              "WhenOpened": "2024-10-28T13:41:02.242Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-28T13:41:02.242Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 3,
               "Title": "KeyList.txt",
               "DocumentMoniker": "D:\\GitHub\\KyberSerial\\Project1\\Project1\\KeyList.txt",
               "RelativeDocumentMoniker": "Project1\\KeyList.txt",
               "ToolTip": "D:\\GitHub\\KyberSerial\\Project1\\Project1\\KeyList.txt",
               "RelativeToolTip": "Project1\\KeyList.txt",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAmCQAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAACAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
               "WhenOpened": "2024-10-28T13:29:14.453Z",
               "EditorCaption": ""
@@ -114,25 +112,24 @@
               "RelativeToolTip": "Project1\\RandomBytes.h",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-28T13:20:17.5Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-28T13:20:17.5Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 4,
               "Title": "RandomBytes.c",
               "DocumentMoniker": "D:\\GitHub\\KyberSerial\\Project1\\Project1\\RandomBytes.c",
               "RelativeDocumentMoniker": "Project1\\RandomBytes.c",
               "ToolTip": "D:\\GitHub\\KyberSerial\\Project1\\Project1\\RandomBytes.c",
               "RelativeToolTip": "Project1\\RandomBytes.c",
-              "ViewState": "AQIAABsAAAAAAAAAAAAAAAoAAAASAAAA",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAACQAAAASAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
               "WhenOpened": "2024-10-28T13:20:01.956Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "Params.h",
               "DocumentMoniker": "D:\\GitHub\\KyberSerial\\Project1\\Project1\\Params.h",
               "RelativeDocumentMoniker": "Project1\\Params.h",
@@ -140,12 +137,11 @@
               "RelativeToolTip": "Project1\\Params.h",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAXAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-28T13:13:21.596Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-28T13:13:21.596Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "Encryption.h",
               "DocumentMoniker": "D:\\GitHub\\KyberSerial\\Project1\\Project1\\Encryption.h",
               "RelativeDocumentMoniker": "Project1\\Encryption.h",
@@ -158,7 +154,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "Encryption.c",
               "DocumentMoniker": "D:\\GitHub\\KyberSerial\\Project1\\Project1\\Encryption.c",
               "RelativeDocumentMoniker": "Project1\\Encryption.c",
@@ -166,8 +162,7 @@
               "RelativeToolTip": "Project1\\Encryption.c",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
-              "WhenOpened": "2024-10-28T13:03:12.838Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-28T13:03:12.838Z"
             },
             {
               "$type": "Document",
@@ -177,7 +172,7 @@
               "RelativeDocumentMoniker": "Project1\\main.c",
               "ToolTip": "D:\\GitHub\\KyberSerial\\Project1\\Project1\\main.c",
               "RelativeToolTip": "Project1\\main.c",
-              "ViewState": "AQIAAAoBAAAAAAAAAAAAABEBAAALAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAOQAAAApAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
               "WhenOpened": "2024-10-26T08:40:58.208Z",
               "EditorCaption": ""
