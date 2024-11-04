@@ -129,7 +129,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+	GetStartSignal();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -282,7 +282,9 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 		// Start decryption
     	HAL_GPIO_TogglePin (GPIOA, GPIO_PIN_5);
     	HAL_GPIO_TogglePin (GPIOA, TriggerPin_Pin);
+
     	indcpa_dec(&PlainText, &CipherText, &SecretKey);
+
     	HAL_GPIO_TogglePin (GPIOA, GPIO_PIN_5);
     	HAL_GPIO_TogglePin (GPIOA, TriggerPin_Pin);
 

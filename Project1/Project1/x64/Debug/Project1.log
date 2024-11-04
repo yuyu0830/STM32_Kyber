@@ -1,7 +1,25 @@
-﻿  main.c
-D:\GitHub\KyberSerial\Project1\Project1\main.c(260,3): warning C4013: 'Encryption'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
-D:\GitHub\KyberSerial\Project1\Project1\main.c(292,3): warning C4098: 'SerialPortConnect': 'void' 함수에서 값을 반환하고 있습니다.
-D:\GitHub\KyberSerial\Project1\Project1\main.c(302,3): warning C4098: 'SerialPortConnect': 'void' 함수에서 값을 반환하고 있습니다.
-D:\GitHub\KyberSerial\Project1\Project1\main.c(314,3): warning C4098: 'SerialPortConnect': 'void' 함수에서 값을 반환하고 있습니다.
-D:\GitHub\KyberSerial\Project1\Project1\main.c(328,3): warning C4098: 'SerialPortConnect': 'void' 함수에서 값을 반환하고 있습니다.
-  Project1.vcxproj -> D:\GitHub\KyberSerial\Project1\x64\Debug\Project1.exe
+﻿  cbd.c
+  Encryption.c
+  fips202.c
+  indcpa.c
+D:\GitHub\STM32_Kyber\Project1\Project1\Encryption.c(8,2): warning C4013: 'printf'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+D:\GitHub\STM32_Kyber\Project1\Project1\fips202.c(44,14): warning C4244: '=': 'uint64_t'에서 'uint8_t'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\GitHub\STM32_Kyber\Project1\Project1\fips202.c(440,23): warning C4244: '=': 'uint64_t'에서 'uint8_t'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  kem.c
+  main.c
+D:\GitHub\STM32_Kyber\Project1\Project1\main.c(260,3): warning C4013: 'Encryption'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+D:\GitHub\STM32_Kyber\Project1\Project1\main.c(292,3): warning C4098: 'SerialPortConnect': 'void' 함수에서 값을 반환하고 있습니다.
+D:\GitHub\STM32_Kyber\Project1\Project1\main.c(302,3): warning C4098: 'SerialPortConnect': 'void' 함수에서 값을 반환하고 있습니다.
+D:\GitHub\STM32_Kyber\Project1\Project1\main.c(314,3): warning C4098: 'SerialPortConnect': 'void' 함수에서 값을 반환하고 있습니다.
+D:\GitHub\STM32_Kyber\Project1\Project1\main.c(328,3): warning C4098: 'SerialPortConnect': 'void' 함수에서 값을 반환하고 있습니다.
+  ntt.c
+  poly.c
+  polyvec.c
+  RandomBytes.c
+D:\GitHub\STM32_Kyber\Project1\Project1\RandomBytes.c(33,29): warning C4267: '함수': 'size_t'에서 'DWORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  reduce.c
+  symmetric-shake.c
+  verify.c
+  코드를 생성하고 있습니다...
+  LINK : D:\GitHub\STM32_Kyber\Project1\x64\Debug\Project1.exe을(를) 찾을 수 없거나 마지막 증분 링크에 의해 빌드되지 않았습니다. 전체 링크를 수행하고 있습니다.
+  Project1.vcxproj -> D:\GitHub\STM32_Kyber\Project1\x64\Debug\Project1.exe
