@@ -10,6 +10,8 @@
 #define CIPHER_TEXT_SIZE 1088
 #define PLAIN_TEXT_SIZE 32
 
+#define CIPHER_TEXT 
+
 #define SIGNAL_SIZE 2
 
 /* Don't change parameters below this line */

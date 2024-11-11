@@ -138,6 +138,7 @@
     <ClCompile Include="polyvec.c" />
     <ClCompile Include="RandomBytes.c" />
     <ClCompile Include="reduce.c" />
+    <ClCompile Include="SerialConnection.c" />
     <ClCompile Include="symmetric-shake.c" />
     <ClCompile Include="verify.c" />
   </ItemGroup>
@@ -148,12 +149,14 @@
     <ClInclude Include="fips202.h" />
     <ClInclude Include="indcpa.h" />
     <ClInclude Include="kem.h" />
+    <ClInclude Include="KeyReference.h" />
     <ClInclude Include="ntt.h" />
     <ClInclude Include="Params.h" />
     <ClInclude Include="poly.h" />
     <ClInclude Include="polyvec.h" />
     <ClInclude Include="RandomBytes.h" />
     <ClInclude Include="reduce.h" />
+    <ClInclude Include="SerialConnection.h" />
     <ClInclude Include="symmetric.h" />
     <ClInclude Include="verify.h" />
   </ItemGroup>
