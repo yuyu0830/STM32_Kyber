@@ -242,22 +242,41 @@ DWORD dwBytesRead = 0;
 
 unsigned char buff[1200] = "";
 
+FILE* fp;
 
-void SerialPortConnect();
+
+int SerialPortConnect();
 void SendKey();
 void Decryption();
 void Verify();
 
+int FileOpen();
+void FileWrite(int cnt);
+
 int main() {
-	SerialPortConnect();
+	if (!SerialPortConnect()) {
+		printf("Log : Serial Port ready!\n");
+	}
+	else {
+		//return 1;
+	}
+
+	if (!FileOpen()) {
+		printf("Log : Log File ready!\n");
+	}
+	else {
+		//return 1;
+	}
 
 	// send key 
 	SendKey();
 
 	// 새로운 메시지, 암호문 만들기
-	for (int r = 0; r < 2000; r++) {
+	for (int r = 0; r < 5; r++) {
 		printf("### %d\n", r);
 		Encryption(ciphertext, originText, publicKey);
+
+		FileWrite(r);
 		
 		// Debug
 		//if (ReadFile(hSerial, buff, SECRET_KEY_SIZE, &dwBytesRead, NULL)) {
@@ -276,9 +295,10 @@ int main() {
 		printf("\n\n");
 	}
 	
+	fclose(fp);
 }
 
-void SerialPortConnect() {
+int SerialPortConnect() {
 	// 통신 설정
 	wchar_t PortNo[20] = { 0 }; //contain friendly name
 	swprintf_s(PortNo, 20, L"\\\\.\\COM5");
@@ -328,7 +348,7 @@ void SerialPortConnect() {
 		return 1;
 	}
 
-	printf("Serial Port ready!\n");
+	return 0;
 }
 
 void SendKey() {
@@ -376,11 +396,42 @@ void Decryption() {
 
 void Verify() {
 	printf("\n");
+	fputc(' ', fp);
 
 	if (!strncmp(plainText, originText, PLAIN_TEXT_SIZE)) {
 		printf("Log : Decryption Successful!\n");
+		fputc('1', fp);
 	}
 	else {
 		printf("Error %d : Decryption Failed...\n", strcoll(plainText, originText));
+		fputc('0', fp);
+	}
+
+	fputc('\n', fp);
+}
+
+int FileOpen() {
+	fopen_s(&fp, "CipherTextLog.txt", "w");
+
+	if (fp == NULL) {
+		printf("Error : File Open failed..\n");
+		return 1;
+	}
+
+	return 0;
+}
+
+void FileWrite(int cnt) {
+	fputc(cnt + 48, fp);
+	fputc(' ', fp);
+
+	for (int i = 0; i < PLAIN_TEXT_SIZE; i++) {
+		unsigned char c = originText[i];
+
+		fputc((c >> 4) + ((c >> 4) < 10 ? 48 : 55), fp);
+		fputc((c & 0b1111) + ((c & 0b1111) < 10 ? 48 : 55), fp);
+		
+		/*if (originText[i] < 10) fputc(originText[i] + 48, fp);
+		else fputc(originText[i] + 87, fp);*/
 	}
 }
