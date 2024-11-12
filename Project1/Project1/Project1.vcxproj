@@ -132,6 +132,7 @@
     <ClCompile Include="fips202.c" />
     <ClCompile Include="indcpa.c" />
     <ClCompile Include="kem.c" />
+    <ClCompile Include="LogFileWrite.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="ntt.c" />
     <ClCompile Include="poly.c" />
@@ -150,6 +151,7 @@
     <ClInclude Include="indcpa.h" />
     <ClInclude Include="kem.h" />
     <ClInclude Include="KeyReference.h" />
+    <ClInclude Include="LogFileWrite.h" />
     <ClInclude Include="ntt.h" />
     <ClInclude Include="Params.h" />
     <ClInclude Include="poly.h" />

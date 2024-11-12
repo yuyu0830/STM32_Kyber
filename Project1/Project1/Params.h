@@ -10,9 +10,9 @@
 #define CIPHER_TEXT_SIZE 1088
 #define PLAIN_TEXT_SIZE 32
 
-#define CIPHER_TEXT 
-
 #define SIGNAL_SIZE 2
+
+#define MAX_ROUND 5
 
 /* Don't change parameters below this line */
 #if   (KYBER_K == 2)
@@ -27,6 +27,9 @@
 
 #define KYBER_N 256
 #define KYBER_Q 3329
+
+#define KEY_SEND_START_SIGNAL "0\0"
+#define DECRYPTION_START_SIGNAL "1\0"
 
 #define KYBER_SYMBYTES 32   /* size in bytes of hashes, and seeds */
 #define KYBER_SSBYTES  32   /* size in bytes of shared key */

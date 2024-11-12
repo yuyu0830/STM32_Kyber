@@ -57,6 +57,9 @@
     <ClCompile Include="SerialConnection.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="LogFileWrite.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Encryption.h">
@@ -105,6 +108,9 @@
       <Filter>소스 파일</Filter>
     </ClInclude>
     <ClInclude Include="KeyReference.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="LogFileWrite.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
   </ItemGroup>

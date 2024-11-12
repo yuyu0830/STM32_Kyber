@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdio.h>
+
 #include "RandomBytes.h"
 #include "Params.h"
 

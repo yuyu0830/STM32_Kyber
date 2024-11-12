@@ -1,6 +1,6 @@
 #include "SerialConnection.h"
 
-HANDLE SerialPortConnect() {
+int SerialPortConnect() {
 	// 통신 설정
 	HANDLE hSerial;
 
@@ -12,8 +12,7 @@ HANDLE SerialPortConnect() {
 	COMMTIMEOUTS timeouts = { 0 };	// 통신 Timeout
 
 	if (hSerial == INVALID_HANDLE_VALUE) {
-		printf("Error : Serial port can't be opened\n");
-		return NULL;
+		return 11;
 	}
 
 	// 세팅 구조체
@@ -21,9 +20,8 @@ HANDLE SerialPortConnect() {
 
 	if (!GetCommState(hSerial, &dcbSerialParams)) {
 		// Error getting COM port state
-		printf("Error : Getting COM port state\n");
 		CloseHandle(hSerial);
-		return NULL;
+		return 12;
 	}
 
 	dcbSerialParams.BaudRate = CBR_115200;	// 보드레이트 설정
@@ -33,9 +31,8 @@ HANDLE SerialPortConnect() {
 
 	if (!SetCommState(hSerial, &dcbSerialParams)) {     // 설정 적용
 		// Error setting COM port state
-		printf("Error : Setting COM port state\n");
 		CloseHandle(hSerial);
-		return NULL;
+		return 13;
 	}
 
 	timeouts.ReadIntervalTimeout = 100;
@@ -47,10 +44,61 @@ HANDLE SerialPortConnect() {
 
 	if (!SetCommTimeouts(hSerial, &timeouts)) {
 		// Error set timeouts
-		printf("Error : Setting timeouts\n");
 		CloseHandle(hSerial);
-		return NULL;
+		return 14;
 	}
 
-	return hSerial;
+	return 0;
 }
+
+int SendKey(char* secretKey) {
+	if (!WriteFile(hSerial, KEY_SEND_START_SIGNAL, SIGNAL_SIZE, &dwBytesWrite, NULL)) {
+		return 31;
+	}
+
+	if (!ReadFile(hSerial, buff, SIGNAL_SIZE, &dwBytesRead, NULL)) {
+		return 32;
+	}
+	
+	if (!WriteFile(hSerial, secretKey, SECRET_KEY_SIZE, &dwBytesWrite, NULL)) {
+		return 33;
+	}
+
+	if (!ReadFile(hSerial, buff, SIGNAL_SIZE, &dwBytesRead, NULL)) {
+		return 34;
+	}
+
+	return 0;
+}
+
+int Decryption(char* cipherText, char* plainText)
+{
+	if (!WriteFile(hSerial, DECRYPTION_START_SIGNAL, SIGNAL_SIZE, &dwBytesWrite, NULL)) {
+		return 41;
+	}
+
+	if (!ReadFile(hSerial, buff, SIGNAL_SIZE, &dwBytesRead, NULL)) {
+		return 42;
+	}
+
+	if (!WriteFile(hSerial, cipherText, CIPHER_TEXT_SIZE, &dwBytesWrite, NULL)) {
+		return 43;
+	}
+
+	if (!ReadFile(hSerial, buff, SIGNAL_SIZE, &dwBytesRead, NULL)) {
+		return 44;
+	}
+
+	if (ReadFile(hSerial, plainText, PLAIN_TEXT_SIZE, &dwBytesRead, NULL)) {
+		printf("plaintext  : ");
+		for (int i = 0; i < PLAIN_TEXT_SIZE; i++) {
+			printf("%02x", plainText[i]);
+		}
+	}
+	else {
+		return 45;
+	}
+
+	return 0;
+}
+
