@@ -32,12 +32,13 @@
 #define KEY_SEND_START_SIGNAL "0\0"
 #define DECRYPTION_START_SIGNAL "1\0"
 #define INPUT_MESSAGE "\
-===========================\n\
+===========================\n\n\n\
 Home\n\
 0 : Exit\n\
-1 : Decryption\n\
-2 : Get Current Setting\n\
-3 : Get New Origin Text\n\
+1 : DPA\n\
+2 : Print Current Setting\n\
+3 : Create Origin Text\n\
+4 : Create Key\n\
 input : \n"
 
 #define KYBER_SYMBYTES 32   /* size in bytes of hashes, and seeds */

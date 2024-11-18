@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <windows.h>
 
 #include "Params.h"
 #include "Encryption.h"
@@ -8,11 +9,13 @@
 #include "KeyReference.h"
 #include "SerialConnection.h"
 
-//enum Input {
-//	Decryption = 1,
-//	PrintCurrentSetting,
-//	ChangeOriginText,
-//};
+enum Input {
+	Input_Exit = 0,
+	Input_DPA,
+	Input_PrintCurrentSetting,
+	Input_CreateOriginText,
+	Input_CreateKey
+};
 
 // CRYSTALS-KYBER
 // Current Setting
@@ -24,7 +27,7 @@ unsigned char ot[SAMPLE_COUNT][ORIGIN_TEXT_SIZE] = { 0, };  // Origin Text
 unsigned char ct[SAMPLE_COUNT][CIPHER_TEXT_SIZE] = { 0, }; // Cipher Text
 
 // Differential Power Analysis
-unsigned char ts[KYBER_SYMBYTES];
+unsigned char ts[KYBER_SYMBYTES]; 
 unsigned char tk[SECRET_KEY_SIZE] = TEMP_KEY_REF;  // Temporary Key
 unsigned char pt[ORIGIN_TEXT_SIZE] = ORIGIN_TEXT_REF;  // Plain Text
 
@@ -32,39 +35,51 @@ unsigned char pt[ORIGIN_TEXT_SIZE] = ORIGIN_TEXT_REF;  // Plain Text
 int Init();
 int Verify();
 
-int main() {
+void DPA();
+void PrintCurrentSetting();
+void CreateOriginText();
+void CreateKey();
 
-	
+int main() {
 	//for (int i = 0; i < PLAIN_TEXT_SIZE; i++) {
 		//printf("%02x", pt[i]);
 	// }
 
-	/*Init();
+	Init();
 
 	int input = 1;
 
 	while (input != 0) {
 		printf(INPUT_MESSAGE);
-
 		scanf_s("%d", &input);
 
+		system("cls");
+
 		switch (input) {
-		case Decryption:
-
+		case Input_Exit:
+			printf("Log : Terminate Process\n");
 			break;
 
-		case PrintCurrentSetting:
-
+		case Input_DPA:
+			DPA();
 			break;
 
-		case ChangeOriginText:
+		case Input_PrintCurrentSetting:
+			PrintCurrentSetting();
+			break;
 
+		case Input_CreateOriginText:
+			CreateOriginText();
+			break;
+
+		case Input_CreateKey:
+			CreateKey();
 			break;
 
 		default:
-
+			printf("Log : Wrong Input, Try again\n");
 		}
-	}*/
+	}
 
 	// 새로운 메시지, 암호문 만들기
 	/*for (int round = 1; round <= 1; round++) {
@@ -124,7 +139,7 @@ int Init() {
 		// return 1;
 	}
 	else {
-		WriteLog(pk, sk);
+		//WriteLog(pk, sk);
 		printf("Log : Open File Successful!\n");
 	}
 
@@ -149,4 +164,29 @@ int Verify() {
 	else {
 		return 1;
 	}
+}
+
+void DPA()
+{
+	int ByteCount;
+
+	printf("Log : Input \n");
+	scanf_s("%d", &ByteCount);
+
+
+}
+
+void PrintCurrentSetting()
+{
+	printf("PrintCurrentSetting\n");
+}
+
+void CreateOriginText()
+{
+	printf("CreateOriginText\n");
+}
+
+void CreateKey()
+{
+	printf("CreateKey\n");
 }

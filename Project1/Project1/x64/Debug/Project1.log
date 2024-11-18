@@ -1,2 +1,4 @@
-﻿  LogFileWrite.c
+﻿  main.c
+D:\Github\STM32_Kyber\Project1\Project1\main.c(161,19): warning C4047: '함수': 'const char *'의 간접 참조 수준이 'unsigned char [50][32]'과(와) 다릅니다.
+D:\Github\STM32_Kyber\Project1\Project1\main.c(161,19): warning C4024: 'strncmp': 형식 및 실제 매개 변수 2의 형식이 서로 다릅니다.
   Project1.vcxproj -> D:\Github\STM32_Kyber\Project1\x64\Debug\Project1.exe
