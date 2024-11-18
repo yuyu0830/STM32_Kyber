@@ -89,9 +89,9 @@ int Decryption(char* cipherText, char* plainText)
 		return 44;
 	}
 
-	if (ReadFile(hSerial, plainText, PLAIN_TEXT_SIZE, &dwBytesRead, NULL)) {
+	if (ReadFile(hSerial, plainText, ORIGIN_TEXT_SIZE, &dwBytesRead, NULL)) {
 		printf("plaintext  : ");
-		for (int i = 0; i < PLAIN_TEXT_SIZE; i++) {
+		for (int i = 0; i < ORIGIN_TEXT_SIZE; i++) {
 			printf("%02x", plainText[i]);
 		}
 	}

@@ -8,9 +8,10 @@
 #define PUBLIC_KEY_SIZE 1184
 #define SECRET_KEY_SIZE 1152
 #define CIPHER_TEXT_SIZE 1088
-#define PLAIN_TEXT_SIZE 32
+#define ORIGIN_TEXT_SIZE 32
 
 #define SIGNAL_SIZE 2
+#define SAMPLE_COUNT 50
 
 #define MAX_ROUND 5
 
@@ -30,6 +31,14 @@
 
 #define KEY_SEND_START_SIGNAL "0\0"
 #define DECRYPTION_START_SIGNAL "1\0"
+#define INPUT_MESSAGE "\
+===========================\n\
+Home\n\
+0 : Exit\n\
+1 : Decryption\n\
+2 : Get Current Setting\n\
+3 : Get New Origin Text\n\
+input : \n"
 
 #define KYBER_SYMBYTES 32   /* size in bytes of hashes, and seeds */
 #define KYBER_SSBYTES  32   /* size in bytes of shared key */

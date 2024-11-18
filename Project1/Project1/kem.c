@@ -74,7 +74,8 @@ int crypto_kem_keypair(uint8_t *pk,
 * Returns 0 (success)
 **************************************************/
 int crypto_kem_enc_derand(uint8_t *ct,
-                          uint8_t *m,
+                          uint8_t *ot,
+                          uint8_t *ss,
                           const uint8_t *pk,
                           const uint8_t *coins)
 {
@@ -91,7 +92,9 @@ int crypto_kem_enc_derand(uint8_t *ct,
   /* coins are in kr+KYBER_SYMBYTES */
   indcpa_enc(ct, buf, pk, kr+KYBER_SYMBYTES);
 
-  memcpy(m, buf, KYBER_SYMBYTES);
+  memcpy(ss, kr, KYBER_SYMBYTES);
+  memcpy(ot, buf, KYBER_SYMBYTES);
+
   return 0;
 }
 
@@ -110,13 +113,14 @@ int crypto_kem_enc_derand(uint8_t *ct,
 *
 * Returns 0 (success)
 **************************************************/
-int crypto_kem_enc(uint8_t *ct,
-                   uint8_t *ss,
-                   const uint8_t *pk)
+int crypto_kem_enc(uint8_t* ct, 
+                   uint8_t* ot,
+                   uint8_t* ss,
+                   const uint8_t* pk)
 {
   uint8_t coins[KYBER_SYMBYTES];
   randombytes(coins, KYBER_SYMBYTES);
-  crypto_kem_enc_derand(ct, ss, pk, coins);
+  crypto_kem_enc_derand(ct, ot, ss, pk, coins);
   return 0;
 }
 
@@ -139,25 +143,30 @@ int crypto_kem_enc(uint8_t *ct,
 **************************************************/
 int crypto_kem_dec(uint8_t *ss,
                    const uint8_t *ct,
-                   const uint8_t *sk)
+                   const uint8_t *sk,
+                   const uint8_t* pk)
 {
   int fail;
   uint8_t buf[2*KYBER_SYMBYTES];
   /* Will contain key, coins */
   uint8_t kr[2*KYBER_SYMBYTES];
   uint8_t cmp[KYBER_CIPHERTEXTBYTES+KYBER_SYMBYTES];
-  const uint8_t *pk = sk+KYBER_INDCPA_SECRETKEYBYTES;
+
+  uint8_t hash[KYBER_SYMBYTES];
 
   indcpa_dec(buf, ct, sk);
 
   /* Multitarget countermeasure for coins + contributory KEM */
-  memcpy(buf+KYBER_SYMBYTES, sk+KYBER_SECRETKEYBYTES-2*KYBER_SYMBYTES, KYBER_SYMBYTES);
+  hash_h(hash, pk, KYBER_PUBLICKEYBYTES);
+
+  memcpy(buf+KYBER_SYMBYTES, hash, KYBER_SYMBYTES);
   hash_g(kr, buf, 2*KYBER_SYMBYTES);
 
   /* coins are in kr+KYBER_SYMBYTES */
   indcpa_enc(cmp, buf, pk, kr+KYBER_SYMBYTES);
 
   fail = verify(ct, cmp, KYBER_CIPHERTEXTBYTES);
+  printf("\n%d\n", fail);
 
   /* Compute rejection key */
   rkprf(ss,sk+KYBER_SECRETKEYBYTES-KYBER_SYMBYTES,ct);

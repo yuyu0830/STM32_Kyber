@@ -5,4 +5,7 @@
 #include "RandomBytes.h"
 #include "Params.h"
 
-void Encryption(uint8_t ciphertext[CIPHER_TEXT_SIZE], uint8_t originText[PLAIN_TEXT_SIZE], uint8_t publicKey[SECRET_KEY_SIZE]);
+void GetNewOriginText(uint8_t *ct,
+					  uint8_t *ot,
+					  uint8_t *ss,
+					  const uint8_t pk[SECRET_KEY_SIZE]);
