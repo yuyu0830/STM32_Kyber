@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "stdio.h": "c",
+        "serialconnection.h": "c",
+        "params.h": "c"
+    }
+}
