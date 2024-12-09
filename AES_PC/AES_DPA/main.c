@@ -21,6 +21,8 @@ int main(void)
 	int state;
 	uint8_t receiveSignal;
 
+	SendSignalToBoard(ENCRYPTION_START);
+
 	SendDataToBoard(key, KEYLEN);
 
 	if (state = GetSignalFromBoard(&receiveSignal)) {
@@ -34,8 +36,6 @@ int main(void)
 		printf("Data Send Fail : Code %d\n", state);
 		return -1;
 	}
-
-	SendSignalToBoard(ENCRYPTION_START);
 
 	GetDataFromBoard(out, KEYLEN);
 

@@ -69,7 +69,7 @@ int GetSignalFromBoard(uint8_t* signal)
 
 int SendDataToBoard(char* const data, int length)
 {
-	if (!WriteFile(hSerial, (short)length, 2, &dwBytesWrite, NULL))
+	if (!WriteFile(hSerial, (uint8_t) length, 1, &dwBytesWrite, NULL))
 		return 30;
 
 	if (!WriteFile(hSerial, data, length, &dwBytesWrite, NULL))
