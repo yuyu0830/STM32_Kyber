@@ -1,5 +1,8 @@
+#include <stdio.h>
 #include <stdint.h>
+#include <string.h>
 
+#include "test.h"
 #include "aes.h"
 
 static void phex(uint8_t* str);

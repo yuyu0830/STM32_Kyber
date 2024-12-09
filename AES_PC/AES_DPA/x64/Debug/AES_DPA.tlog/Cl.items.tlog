@@ -1,2 +1,4 @@
-D:\GitHub\AES_DPA\AES_DPA\aes.c;D:\GitHub\AES_DPA\AES_DPA\x64\Debug\aes.obj
-D:\GitHub\AES_DPA\AES_DPA\main.c;D:\GitHub\AES_DPA\AES_DPA\x64\Debug\main.obj
+D:\Github\STM32_Kyber\AES_PC\AES_DPA\aes.c;D:\Github\STM32_Kyber\AES_PC\AES_DPA\x64\Debug\aes.obj
+D:\Github\STM32_Kyber\AES_PC\AES_DPA\main.c;D:\Github\STM32_Kyber\AES_PC\AES_DPA\x64\Debug\main.obj
+D:\Github\STM32_Kyber\AES_PC\AES_DPA\STMBoard.c;D:\Github\STM32_Kyber\AES_PC\AES_DPA\x64\Debug\STMBoard.obj
+D:\Github\STM32_Kyber\AES_PC\AES_DPA\test.c;D:\Github\STM32_Kyber\AES_PC\AES_DPA\x64\Debug\test.obj

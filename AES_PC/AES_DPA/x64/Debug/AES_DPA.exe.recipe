@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\PKNU\Desktop\1\STM32_Kyber\AES_PC\x64\Debug\AES_DPA.exe</FullPath>
+      <FullPath>D:\Github\STM32_Kyber\AES_PC\x64\Debug\AES_DPA.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

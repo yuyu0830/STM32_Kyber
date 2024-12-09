@@ -1,129 +1,71 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdint.h>
-#include <Windows.h>
-#include <time.h>
 
-// Enable both ECB and CBC mode. Note this can be done before including aes.h or at compile-time.
-// E.g. with GCC by using the -D flag: gcc -c aes.c -DCBC=0 -DECB=1
-#define PORT L"\\\\.\\COM7"
-#define MAX_ROUND 2
-#define SECRET_KEY_REF 0x80
+#include "STMBoard.h"
+#include "aes.h"
+#include "test.h"
 
-HANDLE hSerial;
+#define ENCRYPTION_START (uint8_t) 1
+#define ENCRYPTION_END (uint8_t) 255
 
-DWORD dwBytesWrite;
-DWORD dwBytesRead;
+uint8_t key[KEYLEN] = { 0x2b, 0x7e, 0x15, 0x16, 0x28, 0xae, 0xd2, 0xa6, 0xab, 0xf7, 0x15, 0x88, 0x09, 0xcf, 0x4f, 0x3c };
+uint8_t in[KEYLEN] = { 0x6b, 0xc1, 0xbe, 0xe2, 0x2e, 0x40, 0x9f, 0x96, 0xe9, 0x3d, 0x7e, 0x11, 0x73, 0x93, 0x17, 0x2a };
+uint8_t ref[KEYLEN] = { 0x3a, 0xd7, 0x7b, 0xb4, 0x0d, 0x7a, 0x36, 0x60, 0xa8, 0x9e, 0xca, 0xf3, 0x24, 0x66, 0xef, 0x97 };
+uint8_t out[KEYLEN] = { 0, };
 
-uint8_t buff[2];
+int main(void)
+{
+	//Init();
 
-int SerialPortConnect();
+	int state;
+	uint8_t receiveSignal;
 
-int main(void) {
-	// 통신 설정
-	HANDLE hSerial;
+	SendDataToBoard(key, KEYLEN);
 
-	wchar_t PortNo[20] = { 0 }; //contain friendly name
-	swprintf_s(PortNo, 20, PORT);
-
-	hSerial = CreateFile(PortNo, GENERIC_READ | GENERIC_WRITE, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
-	DCB dcbSerialParams = { 0 };	// 통신 설정용 구조체
-	COMMTIMEOUTS timeouts = { 0 };	// 통신 Timeout
-
-	if (hSerial == INVALID_HANDLE_VALUE) {
-		return 0;
+	if (state = GetSignalFromBoard(&receiveSignal)) {
+		printf("Data Send Fail : Code %d\n", state);
+		return -1;
 	}
 
-	// 세팅 구조체
-	dcbSerialParams.DCBlength = sizeof(dcbSerialParams);
+	SendDataToBoard(in, KEYLEN);
 
-	if (!GetCommState(hSerial, &dcbSerialParams)) {
-		// Error getting COM port state
-		CloseHandle(hSerial);
-		return 0;
+	if (state = GetSignalFromBoard(&receiveSignal)) {
+		printf("Data Send Fail : Code %d\n", state);
+		return -1;
 	}
 
-	dcbSerialParams.BaudRate = CBR_115200;	// 보드레이트 설정
-	dcbSerialParams.ByteSize = 8;			// 데이터 사이즈 설정
-	dcbSerialParams.StopBits = ONESTOPBIT;	// 스탑비트 설정
-	dcbSerialParams.Parity = NOPARITY;		// 패리티 설정
+	SendSignalToBoard(ENCRYPTION_START);
 
-	if (!SetCommState(hSerial, &dcbSerialParams)) {     // 설정 적용
-		// Error setting COM port state
-		CloseHandle(hSerial);
-		return 0;
+	GetDataFromBoard(out, KEYLEN);
+
+	for (int i = 0; i < KEYLEN; i++) {
+		printf("%02x ", out[i]);
 	}
 
-	timeouts.ReadIntervalTimeout = 100;
-	timeouts.ReadTotalTimeoutConstant = 100;
-	timeouts.ReadTotalTimeoutMultiplier = 10;
-
-	timeouts.WriteTotalTimeoutConstant = 100;
-	timeouts.WriteTotalTimeoutMultiplier = 10;
-
-	if (!SetCommTimeouts(hSerial, &timeouts)) {
-		// Error set timeouts
-		CloseHandle(hSerial);
-		return 0;
-	}
-
-	printf("Serial Connect\n");
-
-	
-
-	for (int i = 0; i < 256; i++) {
-		uint8_t plainText[2];
-		
-		//plainText[0] = rand() % 256;
-
-		for (int j = 0; j < 20; j++) {
-			plainText[0] = i;
-			plainText[1] = SECRET_KEY_REF;
-
-			printf("plain text : %02x\n", plainText[0]);
-			if (!WriteFile(hSerial, plainText, 2, &dwBytesWrite, NULL)) {
-				printf("Error : Send Data Failed..\n");
-			}
-			else {
-				printf("Log : %d Data Send Successful!\n", i + 1);
-			}
-
-			if (!ReadFile(hSerial, buff, 1, &dwBytesRead, NULL)) {
-				printf("Error : Receive Data Failed..\n");
-			}
-			else {
-				printf("%02x Data Receive Success!\n", buff[0]);
-			}
-			Sleep(1000);
-		}
-		
-			/*for (int tk = 0; tk < 256; tk++) {
-				plainText[1] = tk;
-				Sleep(10);
-				if (!WriteFile(hSerial, plainText, 2, &dwBytesWrite, NULL)) {
-					printf("Error : Send Data Failed..\n");
-				}
-				else {
-					printf("Log : %d, %d Data Send Successful!\n", i + 1, tk + 1);
-				}
-
-				if (!ReadFile(hSerial, buff, 1, &dwBytesRead, NULL)) {
-					printf("Error : Receive Data Failed..\n");
-				}
-				else {
-					printf("%02x Data Receive Success!\n", buff[0]);
-				}
-				Sleep(5000);
-			
-			}*/
-		
-		printf("\n");
-	}
-
+	printf("%d\n", strncmp(ref, out, KEYLEN));
 
 	return 0;
 }
 
-int SerialPortConnect() {
-	
+
+int Init() {
+	int state;
+
+	// Connect Serial Port 
+	if (state = SerialPortConnect()) {
+		printf("Error code %d : Connect Serial Port Failed..\n", state);
+		return 1;
+	}
+
+	// Open Log File
+	//if (state = FileOpen()) {
+	//	printf("Error code %d : Open File Failed..\n", state);
+	//	return 1;
+	//}
+
+	printf("Log : Initialize Complete!\n\n");
+
+	return 0;
 }
+

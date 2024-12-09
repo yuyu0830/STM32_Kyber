@@ -18,5 +18,28 @@
     <ClCompile Include="main.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="aes.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="test.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="STMBoard.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="aes.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Params.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="STMBoard.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="test.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
