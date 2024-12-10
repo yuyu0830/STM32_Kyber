@@ -2,8 +2,6 @@
 
 int SerialPortConnect() {
 	// 통신 설정
-	HANDLE hSerial;
-
 	wchar_t PortNo[20] = { 0 }; //contain friendly name
 	swprintf_s(PortNo, 20, PORT);
 
@@ -51,9 +49,9 @@ int SerialPortConnect() {
 	return 0;
 }
 
-int SendSignalToBoard(uint8_t signal)
+int SendSignalToBoard(char* const signal)
 {
-	if (!WriteFile(hSerial, signal, 1, &dwBytesWrite, NULL))
+	if (!WriteFile(hSerial, signal, 2, &dwBytesWrite, NULL))
 		return 31;
 
 	return 0;
@@ -61,7 +59,7 @@ int SendSignalToBoard(uint8_t signal)
 
 int GetSignalFromBoard(uint8_t* signal)
 {
-	if (!ReadFile(hSerial, signal, 1, &dwBytesRead, NULL))
+	if (!ReadFile(hSerial, signal, 2, &dwBytesRead, NULL))
 		return 32;
 
 	return 0;
@@ -69,9 +67,6 @@ int GetSignalFromBoard(uint8_t* signal)
 
 int SendDataToBoard(char* const data, int length)
 {
-	if (!WriteFile(hSerial, (uint8_t) length, 1, &dwBytesWrite, NULL))
-		return 30;
-
 	if (!WriteFile(hSerial, data, length, &dwBytesWrite, NULL))
 		return 31;
 

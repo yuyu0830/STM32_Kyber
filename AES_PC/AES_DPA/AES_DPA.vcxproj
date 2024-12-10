@@ -128,13 +128,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="aes.c" />
+    <ClCompile Include="LogFileWrite.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="RandomBytes.c" />
     <ClCompile Include="STMBoard.c" />
     <ClCompile Include="test.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="aes.h" />
+    <ClInclude Include="LogFileWrite.h" />
     <ClInclude Include="Params.h" />
+    <ClInclude Include="RandomBytes.h" />
     <ClInclude Include="STMBoard.h" />
     <ClInclude Include="test.h" />
   </ItemGroup>

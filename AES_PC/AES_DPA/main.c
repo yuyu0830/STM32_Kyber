@@ -1,71 +1,154 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdint.h>
+#include <Windows.h>
 
 #include "STMBoard.h"
+#include "LogFileWrite.h"
+#include "RandomBytes.h"
+#include "Params.h"
 #include "aes.h"
-#include "test.h"
 
-#define ENCRYPTION_START (uint8_t) 1
+#define PORT L"\\\\.\\COM7"
+#define MAX_ROUND 200
+
+#define KEY_TRANSMIT (uint8_t) 1
+#define ENCRYPTION_START (uint8_t) 2
 #define ENCRYPTION_END (uint8_t) 255
 
-uint8_t key[KEYLEN] = { 0x2b, 0x7e, 0x15, 0x16, 0x28, 0xae, 0xd2, 0xa6, 0xab, 0xf7, 0x15, 0x88, 0x09, 0xcf, 0x4f, 0x3c };
-uint8_t in[KEYLEN] = { 0x6b, 0xc1, 0xbe, 0xe2, 0x2e, 0x40, 0x9f, 0x96, 0xe9, 0x3d, 0x7e, 0x11, 0x73, 0x93, 0x17, 0x2a };
-uint8_t ref[KEYLEN] = { 0x3a, 0xd7, 0x7b, 0xb4, 0x0d, 0x7a, 0x36, 0x60, 0xa8, 0x9e, 0xca, 0xf3, 0x24, 0x66, 0xef, 0x97 };
-uint8_t out[KEYLEN] = { 0, };
+uint8_t const key[KEYLEN] = { 0x2b, 0x7e, 0x15, 0x16, 0x28, 0xae, 0xd2, 0xa6, 0xab, 0xf7, 0x15, 0x88, 0x09, 0xcf, 0x4f, 0x3c };
+
+uint8_t in[KEYLEN];
+uint8_t ref[KEYLEN];
+uint8_t out[KEYLEN];
+
+DWORD dwBytesWrite;
+DWORD dwBytesRead;
 
 int main(void)
 {
-	//Init();
+	srand(time(NULL));
 
-	int state;
-	uint8_t receiveSignal;
+	if (SerialPortConnect()) {
+		printf("Serial Port Connect Error\n");
+		return -1;
+	}
 
-	SendSignalToBoard(ENCRYPTION_START);
+	if (FileOpen()) {
+		printf("File Open Error\n");
+		return - 1;
+	}
 
+	uint8_t buffer[16];
+	char sendSignal[2], receiveSignal[2];
+
+	sendSignal[0] = KEY_TRANSMIT;
+	sendSignal[1] = 1;
+
+	SendSignalToBoard(sendSignal);
+	GetSignalFromBoard(receiveSignal);
+	
 	SendDataToBoard(key, KEYLEN);
+	GetDataFromBoard(buffer, KEYLEN);
 
-	if (state = GetSignalFromBoard(&receiveSignal)) {
-		printf("Data Send Fail : Code %d\n", state);
+	if (strncmp(key, buffer, KEYLEN)) {
+		printf("Key Transmit Error\n");
 		return -1;
 	}
 
-	SendDataToBoard(in, KEYLEN);
+	for (int i = 0; i < MAX_ROUND; i++) {
+		// Random PlainText Generation
+		GetRandomByte(in, KEYLEN);
+		SavePlainText(in);
 
-	if (state = GetSignalFromBoard(&receiveSignal)) {
-		printf("Data Send Fail : Code %d\n", state);
-		return -1;
+		// Send Start Signal
+		sendSignal[0] = ENCRYPTION_START;
+
+		SendSignalToBoard(sendSignal);
+		GetSignalFromBoard(&receiveSignal);
+
+		// Send Random PlainText
+		SendDataToBoard(in, KEYLEN);
+		GetDataFromBoard(buffer, KEYLEN);
+
+		if (strncmp(in, buffer, KEYLEN)) {
+			printf("Data Transmit Error\n");
+			break;
+		}
+
+		SendSignalToBoard(sendSignal);
+		GetDataFromBoard(out, KEYLEN);
+
+		AES128_ECB_encrypt(in, key, ref);
+
+		for (int j = 0; j < KEYLEN; j++) {
+			printf("%02x ", out[j]);
+		}
+		printf("\n");
+		for (int j = 0; j < KEYLEN; j++) {
+			printf("%02x ", ref[j]);
+		}
+		printf("\n");
+
+		if (strncmp(out, ref, KEYLEN)) {
+			printf("Encryption Error\n");
+			break;
+		}
+
+		printf("%02d Success!\n", i + 1);
+		Sleep(1000);
 	}
 
-	GetDataFromBoard(out, KEYLEN);
+	FileClose();
 
-	for (int i = 0; i < KEYLEN; i++) {
-		printf("%02x ", out[i]);
-	}
+	//uint8_t rs[16];
 
-	printf("%d\n", strncmp(ref, out, KEYLEN));
+	//if (!WriteFile(hSerial, rs, 2, &dwBytesWrite, NULL)) {
+	//	printf("!\n");
+	//};
 
-	return 0;
-}
+	//if (!ReadFile(hSerial, rs, 2, &dwBytesRead, NULL)) {
+	//	printf("Data Receive Fail\n");
+	//}
+	//printf("%02x, %02x\n", rs[0], rs[1]);
 
-
-int Init() {
-	int state;
-
-	// Connect Serial Port 
-	if (state = SerialPortConnect()) {
-		printf("Error code %d : Connect Serial Port Failed..\n", state);
-		return 1;
-	}
-
-	// Open Log File
-	//if (state = FileOpen()) {
-	//	printf("Error code %d : Open File Failed..\n", state);
-	//	return 1;
+	//if (!WriteFile(hSerial, in, KEYLEN, &dwBytesWrite, NULL)) {
+	//	printf("Data Send Fail\n");
 	//}
 
-	printf("Log : Initialize Complete!\n\n");
+	//if (!ReadFile(hSerial, rs, KEYLEN, &dwBytesRead, NULL)) {
+	//	printf("Data Receive Fail\n");
+	//}
+	//for (int i = 0; i < KEYLEN; i++) {
+	//	printf("%02x ", rs[i]);
+	//}
+	//printf("\n");
+
+	//if (!WriteFile(hSerial, key, KEYLEN, &dwBytesWrite, NULL)) {
+	//	printf("Data Send Fail\n");
+	//}
+	//for (int i = 0; i < KEYLEN; i++) {
+	//	printf("%02x ", out[i]);
+	//}
+	//printf("\n");
+
+	//if (!ReadFile(hSerial, out, KEYLEN, &dwBytesRead, NULL)) {
+	//	printf("Data Receive Fail\n");
+	//}
+
+
+	//if (!GetSignalFromBoard(&receiveSignal)) {
+	//	printf("Data Send Fail\n");
+	//	return -1;
+	//}
+
+	//GetDataFromBoard(out, KEYLEN);
+
+	//for (int i = 0; i < KEYLEN; i++) {
+	//	printf("%02x ", out[i]);
+	//}
+
+	//printf("%d\n", strncmp(ref, out, KEYLEN));
 
 	return 0;
 }
-

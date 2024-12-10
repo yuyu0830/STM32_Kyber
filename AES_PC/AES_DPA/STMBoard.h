@@ -7,7 +7,7 @@
 
 #include "Params.h"
 
-#define PORT L"\\\\.\\COM5"
+#define PORT L"\\\\.\\COM7"
 
 HANDLE hSerial;
 
@@ -16,7 +16,7 @@ DWORD dwBytesRead;
 
 int SerialPortConnect();
 
-int SendSignalToBoard(uint8_t signal);
+int SendSignalToBoard(char* const signal);
 int GetSignalFromBoard(uint8_t* signal);
 
 int SendDataToBoard(char* const data, int length);

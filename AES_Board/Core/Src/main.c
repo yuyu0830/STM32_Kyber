@@ -27,21 +27,21 @@
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
 typedef unsigned char uint8_t;
-typedef unsigned short uint16_t;
+
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 
-#define ENCRYPTION_START (uint8_t) 1
-#define ENCRYPTION_END (uint8_t) 255
+#define KEY_TRANSMIT (uint8_t) 1
+#define ENCRYPTION_START (uint8_t) 2
 
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
 
-#define GetData() HAL_UART_Receive_IT(&huart2, &signal, 1);
+#define GetData() HAL_UART_Receive_IT(&huart2, &signal, 2);
 #define SendData() HAL_UART_Transmit(&huart2, &result, 1, 100);
 
 /* USER CODE END PM */
@@ -51,7 +51,7 @@ UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 uint8_t key[16], in[16], out[16];
-uint8_t signal, result;
+uint8_t signal[2], result;
 
 /* USER CODE END PV */
 
@@ -106,9 +106,9 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    /* USER CODE END WHILE */
-	  HAL_UART_Receive_IT(&huart2, &signal, 1);
-    /* USER CODE BEGIN 3 */
+	/* USER CODE END WHILE */
+	  HAL_UART_Receive_IT(&huart2, &signal, 2);
+	/* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
 }
@@ -239,21 +239,31 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
   if (huart->Instance == USART2)
   {
-    if (signal == ENCRYPTION_START) {
-      result = 1;
-      HAL_UART_Transmit(&huart2, &result, 1, 100);
+	  if (signal[0] == KEY_TRANSMIT)
+	  {
+		  HAL_UART_Transmit(&huart2, &signal, 2, 100);
 
-      HAL_UART_Receive_IT(&huart2, &key, 16);
-      HAL_UART_Transmit(&huart2, &result, 1, 100);
+		  HAL_UART_Receive(&huart2, &key, 16, 100);
+		  HAL_UART_Transmit(&huart2, &key, 16, 100);
+	  }
+	  else if (signal[0] == ENCRYPTION_START)
+	  {
+		  HAL_UART_Transmit(&huart2, &signal, 2, 100);
 
-      HAL_UART_Receive_IT(&huart2, &in, 16);
-      HAL_UART_Transmit(&huart2, &result, 1, 100);
+		  HAL_UART_Receive(&huart2, &in, 16, 100);        // Get Key
+		  HAL_UART_Transmit(&huart2, &in, 16, 100);
 
-      HAL_GPIO_TogglePin (GPIOA, Trigger_Pin);
-      // AES
-	    HAL_GPIO_TogglePin (GPIOA, Trigger_Pin);
-      HAL_UART_Transmit(&huart2, &out, 16, 100);
-    }
+		  HAL_UART_Receive(&huart2, &signal, 2, 100);
+		  // AES Encryption
+		  HAL_GPIO_TogglePin (GPIOA, Trigger_Pin);
+
+		  AES128_ECB_encrypt(in, key, out);
+
+		  HAL_GPIO_TogglePin (GPIOA, Trigger_Pin);
+
+		  HAL_UART_Transmit(&huart2, &out, 16, 100);
+	  }
+
   }
 }
 

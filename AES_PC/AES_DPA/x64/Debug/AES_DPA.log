@@ -1,8 +1,8 @@
-﻿  aes.c
-  main.c
-  STMBoard.c
-  test.c
-D:\Github\STM32_Kyber\AES_PC\AES_DPA\STMBoard.c(56,26): warning C4022: 'WriteFile': 실제 매개 변수 2의 포인터가 일치하지 않습니다.
-  코드를 생성하고 있습니다...
-D:\Github\STM32_Kyber\AES_PC\AES_DPA\STMBoard.c(72,33): warning C4022: 'WriteFile': 실제 매개 변수 2의 포인터가 일치하지 않습니다.
-  AES_DPA.vcxproj -> D:\Github\STM32_Kyber\AES_PC\x64\Debug\AES_DPA.exe
+﻿  main.c
+C:\Users\PKNU\Desktop\1\STM32_Kyber\AES_PC\AES_DPA\main.c(13,1): warning C4005: 'MAX_ROUND': 매크로 재정의
+C:\Users\PKNU\Desktop\1\STM32_Kyber\AES_PC\AES_DPA\Params.h(19): message : 'MAX_ROUND'의 이전 정의를 참조하십시오.
+C:\Users\PKNU\Desktop\1\STM32_Kyber\AES_PC\AES_DPA\main.c(30,8): warning C4244: '함수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\PKNU\Desktop\1\STM32_Kyber\AES_PC\AES_DPA\main.c(51,21): warning C4090: '함수': 'const' 한정자가 서로 다릅니다.
+C:\Users\PKNU\Desktop\1\STM32_Kyber\AES_PC\AES_DPA\main.c(68,36): warning C4047: '함수': 'uint8_t *'의 간접 참조 수준이 'char (*)[2]'과(와) 다릅니다.
+C:\Users\PKNU\Desktop\1\STM32_Kyber\AES_PC\AES_DPA\main.c(68,22): warning C4024: 'GetSignalFromBoard': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
+  AES_DPA.vcxproj -> C:\Users\PKNU\Desktop\1\STM32_Kyber\AES_PC\x64\Debug\AES_DPA.exe
