@@ -51,7 +51,7 @@ int SerialPortConnect() {
 	return 0;
 }
 
-int SendKey(char* secretKey) {
+int SendKey(const char* sk) {
 	if (!WriteFile(hSerial, KEY_SEND_START_SIGNAL, SIGNAL_SIZE, &dwBytesWrite, NULL)) {
 		return 31;
 	}
@@ -60,13 +60,14 @@ int SendKey(char* secretKey) {
 		return 32;
 	}
 	
-	if (!WriteFile(hSerial, secretKey, SECRET_KEY_SIZE, &dwBytesWrite, NULL)) {
+	if (!WriteFile(hSerial, sk, SECRET_KEY_SIZE, &dwBytesWrite, NULL)) {
 		return 33;
 	}
 
 	if (!ReadFile(hSerial, buff, SIGNAL_SIZE, &dwBytesRead, NULL)) {
 		return 34;
 	}
+
 
 	return 0;
 }
@@ -85,18 +86,8 @@ int Decryption(char* cipherText, char* plainText)
 		return 43;
 	}
 
-	if (!ReadFile(hSerial, buff, SIGNAL_SIZE, &dwBytesRead, NULL)) {
+	if (!ReadFile(hSerial, plainText, ORIGIN_TEXT_SIZE, &dwBytesRead, NULL)) {
 		return 44;
-	}
-
-	if (ReadFile(hSerial, plainText, ORIGIN_TEXT_SIZE, &dwBytesRead, NULL)) {
-		printf("plaintext  : ");
-		for (int i = 0; i < ORIGIN_TEXT_SIZE; i++) {
-			printf("%02x", plainText[i]);
-		}
-	}
-	else {
-		return 45;
 	}
 
 	return 0;

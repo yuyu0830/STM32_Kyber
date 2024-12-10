@@ -15,5 +15,5 @@ DWORD dwBytesRead;
 unsigned char buff[1200];
 
 int SerialPortConnect();
-int SendKey(char* secretKey);
+int SendKey(const char* sk);
 int Decryption(char* cipherText, char* plainText);

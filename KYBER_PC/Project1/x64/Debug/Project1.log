@@ -1,22 +1,2 @@
-﻿  cbd.c
-  Encryption.c
-  fips202.c
-C:\Users\PKNU\Desktop\1\STM32_Kyber\KYBER_PC\Project1\fips202.c(44,14): warning C4244: '=': 'uint64_t'에서 'uint8_t'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\PKNU\Desktop\1\STM32_Kyber\KYBER_PC\Project1\fips202.c(440,23): warning C4244: '=': 'uint64_t'에서 'uint8_t'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  indcpa.c
-  kem.c
-C:\Users\PKNU\Desktop\1\STM32_Kyber\KYBER_PC\Project1\kem.c(169,3): warning C4013: 'printf'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
-  LogFileWrite.c
-C:\Users\PKNU\Desktop\1\STM32_Kyber\KYBER_PC\Project1\LogFileWrite.c(162,19): error C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  main.c
-C:\Users\PKNU\Desktop\1\STM32_Kyber\KYBER_PC\Project1\main.c(5,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'aes.h': No such file or directory
-  ntt.c
-  poly.c
-  polyvec.c
-  RandomBytes.c
-C:\Users\PKNU\Desktop\1\STM32_Kyber\KYBER_PC\Project1\RandomBytes.c(33,29): warning C4267: '함수': 'size_t'에서 'DWORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  reduce.c
-  SerialConnection.c
-  symmetric-shake.c
-  verify.c
-  코드를 생성하고 있습니다...
+﻿  main.c
+  Project1.vcxproj -> D:\Github\STM32_Kyber\KYBER_PC\x64\Debug\Project1.exe
