@@ -38,7 +38,7 @@ NOTE:   String length must be evenly divisible by 16byte (str_len % 16 == 0)
 
 #include "aes.h"
 #include "Params.h"
-
+#include "main.h"
 
 
 // jcallan@github points out that declaring Multiply as a function 
@@ -385,9 +385,13 @@ static void Cipher(void)
     // There will be Nr rounds.
     // The first Nr-1 rounds are identical.
     // These Nr-1 rounds are executed in the loop below.
+
+    HAL_GPIO_TogglePin (GPIOA, Trigger_Pin);
     for (round = 1; round < Nr; ++round)
     {
+
         SubBytes();
+        if (round == 1) HAL_GPIO_TogglePin (GPIOA, Trigger_Pin); 		// only first SBOX capture
         ShiftRows();
         MixColumns();
         AddRoundKey(round);

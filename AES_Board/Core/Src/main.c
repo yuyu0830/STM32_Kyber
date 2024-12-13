@@ -17,6 +17,8 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
+#include <stdlib.h>
+
 #include "main.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -33,15 +35,19 @@ typedef unsigned char uint8_t;
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 
+#define KEYLEN 16
+
 #define KEY_TRANSMIT (uint8_t) 1
 #define ENCRYPTION_START (uint8_t) 2
+
+#define DONGGEUN_SEED 10000
 
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
 
-#define GetData() HAL_UART_Receive_IT(&huart2, &signal, 2);
+#define GetData() HAL_UART_Receive_IT(&huart2, &RecvSignal, 2);
 #define SendData() HAL_UART_Transmit(&huart2, &result, 1, 100);
 
 /* USER CODE END PM */
@@ -50,8 +56,12 @@ typedef unsigned char uint8_t;
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
-uint8_t key[16], in[16], out[16];
-uint8_t signal[2], result;
+
+uint8_t const key[KEYLEN] = { 0x2b, 0x7e, 0x15, 0x16, 0x28, 0xae, 0xd2, 0xa6, 0xab, 0xf7, 0x15, 0x88, 0x09, 0xcf, 0x4f, 0x3c };
+
+uint8_t in[16], out[16];
+uint8_t RecvSignal[2];
+uint8_t pressed = 0;
 
 /* USER CODE END PV */
 
@@ -76,7 +86,7 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-
+	srand(DONGGEUN_SEED);
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -107,7 +117,44 @@ int main(void)
   while (1)
   {
 	/* USER CODE END WHILE */
-	  HAL_UART_Receive_IT(&huart2, &signal, 2);
+	  if(!HAL_GPIO_ReadPin(GPIOC, B1_Pin) && !pressed)
+	  {
+		  pressed = 1;
+		  HAL_GPIO_WritePin(GPIOA,LD2_Pin,1); // LED ON
+		  HAL_Delay(2000);
+
+		  for (int i = 0; i < 1000; i++) {
+	 	  	GetRandomByte(in, KEYLEN);
+
+	 	  	// HAL_UART_Transmit(&huart2, &in, KEYLEN, 100);
+
+//	 	  	HAL_GPIO_TogglePin (GPIOA, Trigger_Pin);
+	 	  	AES128_ECB_encrypt(in, key, out);
+
+//	 	  	HAL_GPIO_TogglePin (GPIOA, Trigger_Pin);
+
+	 	  	HAL_Delay(1000);
+		  }
+	  }
+
+//	  if(!HAL_GPIO_ReadPin(GPIOC, B1_Pin) && !pressed)
+//	  {
+//		  pressed = 1;
+//		  HAL_GPIO_WritePin(GPIOA,LD2_Pin,1); // LED ON
+//		  sleep(2000);
+//
+//		  for (int i = 0; i < 10; i++) {
+//			  GetRandomByte(in, KEYLEN);
+//
+//			  HAL_UART_Transmit(&huart2, &in, KEYLEN, 100);
+//
+//			  AES128_ECB_encrypt(in, key, out);
+//
+//			  HAL_UART_Transmit(&huart2, &out, KEYLEN, 100);
+//		  }
+//	  }
+
+	  //HAL_UART_Receive_IT(&huart2, &RecvSignal, 2);
 	/* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -230,6 +277,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
+
+
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */
 }
@@ -239,30 +288,33 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
   if (huart->Instance == USART2)
   {
-	  if (signal[0] == KEY_TRANSMIT)
-	  {
-		  HAL_UART_Transmit(&huart2, &signal, 2, 100);
 
-		  HAL_UART_Receive(&huart2, &key, 16, 100);
-		  HAL_UART_Transmit(&huart2, &key, 16, 100);
-	  }
-	  else if (signal[0] == ENCRYPTION_START)
-	  {
-		  HAL_UART_Transmit(&huart2, &signal, 2, 100);
 
-		  HAL_UART_Receive(&huart2, &in, 16, 100);        // Get Key
-		  HAL_UART_Transmit(&huart2, &in, 16, 100);
+//	  if (RecvSignal[0] == KEY_TRANSMIT)
+//	  {
+//		  HAL_UART_Transmit(&huart2, &RecvSignal, 2, 100);
+//
+//		  HAL_UART_Receive(&huart2, &key, 16, 100);
+//		  HAL_UART_Transmit(&huart2, &key, 16, 100);
+//	  }
+//	  else if (RecvSignal[0] == ENCRYPTION_START)
+//	  {
+	  	  //for (int i = 0; i < 10; i++) {
+	  	//	GetRandomByte(in, KEYLEN);      // Get Key
+	  	//	HAL_UART_Transmit(&huart2, &in, 16, 100);
+	  	//	HAL_UART_Receive(&huart2, &RecvSignal, 2, 100);
+	  	  //}
 
-		  HAL_UART_Receive(&huart2, &signal, 2, 100);
+
 		  // AES Encryption
-		  HAL_GPIO_TogglePin (GPIOA, Trigger_Pin);
+		 // HAL_GPIO_TogglePin (GPIOA, Trigger_Pin);
 
-		  AES128_ECB_encrypt(in, key, out);
+		  //AES128_ECB_encrypt(in, key, out);
 
-		  HAL_GPIO_TogglePin (GPIOA, Trigger_Pin);
+		  //HAL_GPIO_TogglePin (GPIOA, Trigger_Pin);
 
-		  HAL_UART_Transmit(&huart2, &out, 16, 100);
-	  }
+		  //HAL_UART_Transmit(&huart2, &out, 16, 100);
+//	  }
 
   }
 }

@@ -17,3 +17,35 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64 C:\Users\PKNU\Desktop\
 
 !ENTRY org.eclipse.core.jobs 2 2 2024-12-10 09:21:54.271
 !MESSAGE Job found still running after platform shutdown.  Jobs should be canceled by the plugin that scheduled them during shutdown: org.eclipse.ui.internal.Workbench$39
+!SESSION 2024-12-11 14:42:51.071 -----------------------------------------------
+eclipse.buildId=Version 1.16.1
+java.version=17.0.11
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  C:\Users\PKNU\Desktop\1\STM32_Kyber\AES_Board\.project
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 C:\Users\PKNU\Desktop\1\STM32_Kyber\AES_Board\.project
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2024-12-11 14:42:54.401
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2024-12-11 14:42:54.402
+!MESSAGE Log4j2 initialized with config file C:\Users\PKNU\Desktop\1\STM32_Kyber\AES_Board\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2024-12-11 14:42:57.052
+!MESSAGE Started RMI Server, listening on port 41337
+!SESSION 2024-12-11 14:45:43.479 -----------------------------------------------
+eclipse.buildId=Version 1.16.1
+java.version=17.0.11
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  C:\Users\PKNU\Desktop\1\STM32_Kyber\AES_Board\.project
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 C:\Users\PKNU\Desktop\1\STM32_Kyber\AES_Board\.project
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2024-12-11 14:45:46.787
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2024-12-11 14:45:46.788
+!MESSAGE Log4j2 initialized with config file C:\Users\PKNU\Desktop\1\STM32_Kyber\AES_Board\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2024-12-11 14:45:49.370
+!MESSAGE Started RMI Server, listening on port 41337

@@ -16,6 +16,8 @@
 #define ENCRYPTION_START (uint8_t) 2
 #define ENCRYPTION_END (uint8_t) 255
 
+#define DONGGEUN_SEED 10000
+
 uint8_t const key[KEYLEN] = { 0x2b, 0x7e, 0x15, 0x16, 0x28, 0xae, 0xd2, 0xa6, 0xab, 0xf7, 0x15, 0x88, 0x09, 0xcf, 0x4f, 0x3c };
 
 uint8_t in[KEYLEN];
@@ -27,7 +29,7 @@ DWORD dwBytesRead;
 
 int main(void)
 {
-	srand(time(NULL));
+	srand(DONGGEUN_SEED);
 
 	if (SerialPortConnect()) {
 		printf("Serial Port Connect Error\n");
@@ -39,8 +41,66 @@ int main(void)
 		return - 1;
 	}
 
-	uint8_t buffer[16];
 	char sendSignal[2], receiveSignal[2];
+
+	sendSignal[0] = KEY_TRANSMIT;
+	sendSignal[1] = 1;
+
+	SendSignalToBoard(sendSignal);
+
+	for (int i = 0; i < 3; i++) {
+		uint8_t buffer[16];
+		GetDataFromBoard(buffer, KEYLEN);
+		SendSignalToBoard(sendSignal);
+
+		for (int j = 0; j < KEYLEN; j++) {
+			printf("%02x ", buffer[j]);
+		}
+		printf("\n");
+	}
+
+	return 0;
+
+	for (int i = 0; i < 5000; i++) {
+		uint8_t buffer[16];
+
+		GetDataFromBoard(buffer, KEYLEN);
+		SavePlainText(buffer);
+		SendSignalToBoard(sendSignal);
+
+		for (int j = 0; j < KEYLEN; j++) {
+			printf("%02x ", buffer[j]);
+		}
+		printf("\n");
+
+		AES128_ECB_encrypt(buffer, key, out);
+
+		GetDataFromBoard(buffer, KEYLEN);
+		SendSignalToBoard(sendSignal);
+
+		for (int j = 0; j < KEYLEN; j++) {
+			printf("%02x ", buffer[j]);
+		}
+		printf("\n");
+
+		for (int j = 0; j < KEYLEN; j++) {
+			printf("%02x ", out[j]);
+		}
+		printf("\n");
+
+		if (strncmp(out, buffer, KEYLEN)) {
+			
+			break;
+		}
+		printf("%d Success\n", i + 1);
+
+	}
+
+	return 0;
+
+
+	uint8_t buffer[16];
+	
 
 	sendSignal[0] = KEY_TRANSMIT;
 	sendSignal[1] = 1;
